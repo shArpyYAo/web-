@@ -1,4 +1,4 @@
-# web-
+# web-safe
 web安全相关的读书笔记，做个Research Review
 
 # 《XSS跨站脚本攻击剖析与防御》
