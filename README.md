@@ -20,17 +20,22 @@ XSS攻击就是将非法的js这一些脚本注入到用户浏览的网页上执
 如果用户可以随心所欲的引入<>标记，那么他就可以添加一个标签
 比如<script></script>、<img>、<table></table>等标签
 例子：
-> <script>alert('xss');</script>
+
+    <script>alert('xss');</script>
+    
 所以首当其冲要过滤的就是<>、<script>
     
 #### 利用html属性
 很多html标记中的属性都支持javascript:[code]伪协议的形式，这个特殊的协议类型声明了URL的主体是任意的js代码，由js解释器运行（有局限性，只有在支持伪协议的浏览器上才可以。例如ie6）
 例子：
-> <img src=“javascript:alert('xss');”>
+
+    <img src=“javascript:alert('xss');”>
 
 #### 空格回车Tab
 先看一个例子
-> <img src="javas cri pt : alert(/xss/)" >
+
+    <img src="javas cri pt : alert(/xss/)" >
+    
 为什么这样子也是有效果的呢？因为在js中通常以分号结束语句的。
     
     var a
@@ -41,7 +46,9 @@ XSS攻击就是将非法的js这一些脚本注入到用户浏览的网页上执
 
 #### 对标签属性进行转码（特别要注意转码，很灵活多变）
 html的属性值是支持ASCII码的。
-> <img src="javascrip&#116&#58alert('xss')" >
+
+    <img src="javascrip&#116&#58alert('xss')" >
+    
 对应ASCII码可以看出，t的ASCII码是116，用&#116表示，：的ASCII码是58，用&#58表示。
 同样的，全部转码也是可以生效的（有局限性，只有在支持伪协议的浏览器上才可以。例如ie6）
 所以业务上没需要，也最好过滤&、#、/等字符。
